@@ -34,7 +34,7 @@ pre-plugin application shell (`Ctrl+Shift+R` on Windows/Linux,
 ## Manual installation
 
 Copy `Jellyfin.Plugin.FineZoom.dll` and `BINARY-LICENSE` into a
-`Fine Zoom_1.0.0.0` directory beneath Jellyfin's plugins directory, then
+`Fine Zoom_1.0.1.0` directory beneath Jellyfin's plugins directory, then
 restart Jellyfin and hard-refresh Jellyfin Web.
 
 ## Technical note

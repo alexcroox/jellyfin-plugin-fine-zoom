@@ -31,7 +31,7 @@
         style.id = styleId;
         style.textContent = `
             .videoPlayerContainer { overflow: hidden !important; }
-            video.htmlvideoplayer.${activeVideoClass} {
+            video.${activeVideoClass} {
                 object-fit: contain !important;
                 transform: scale(var(--fine-zoom-scale, 1)) !important;
                 transform-origin: center center !important;
@@ -253,6 +253,22 @@
         window.setTimeout(() => syncMedia(), 0);
     }
 
+    function findActivePage() {
+        const pages = Array.from(document.querySelectorAll('#videoOsdPage'));
+        for (let index = pages.length - 1; index >= 0; index -= 1) {
+            const candidate = pages[index];
+            if (!candidate.hidden && !candidate.classList.contains('hide')) return candidate;
+        }
+
+        return pages.length ? pages[pages.length - 1] : null;
+    }
+
+    function findVideo() {
+        return document.querySelector(
+            '.videoPlayerContainer video.htmlvideoplayer, .videoPlayerContainer video, #videoOsdPage video'
+        );
+    }
+
     function setPanelOpen(open) {
         if (!panel || !toggleButton) return;
         panel.classList.toggle('hide', !open);
@@ -355,16 +371,23 @@
         mountScheduled = false;
         ensureStyles();
 
-        const page = document.querySelector('#videoOsdPage');
+        const page = findActivePage();
         const settingsButton = page?.querySelector('.btnVideoOsdSettings');
-        const video = document.querySelector('.videoPlayerContainer video.htmlvideoplayer');
+        const video = findVideo();
         if (!page || !settingsButton) {
             bindVideo(video);
             return;
         }
 
-        if (!panel?.isConnected) createPanel(page);
-        if (!toggleButton?.isConnected) createToggle(settingsButton);
+        if (!panel?.isConnected || panel.parentElement !== page) {
+            document.querySelectorAll(`#${panelId}`).forEach(element => element.remove());
+            createPanel(page);
+        }
+
+        if (!toggleButton?.isConnected || toggleButton.parentElement !== settingsButton.parentElement) {
+            document.querySelectorAll(`.${buttonClass}`).forEach(element => element.remove());
+            createToggle(settingsButton);
+        }
 
         bindVideo(video);
         toggleButton.classList.toggle('hide', !video);
@@ -395,5 +418,9 @@
     });
 
     window.addEventListener('hashchange', scheduleMount);
+    window.addEventListener('pageshow', scheduleMount);
+    window.addEventListener('focus', scheduleMount);
+    document.addEventListener('visibilitychange', scheduleMount);
+    window.setInterval(scheduleMount, 1000);
     scheduleMount();
 })();

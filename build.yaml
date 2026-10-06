@@ -1,6 +1,6 @@
 name: "Fine Zoom"
 guid: "4fdc5a27-f513-4ee5-878d-18ecd0184784"
-version: "1.0.0.0"
+version: "1.0.1.0"
 targetAbi: "12.0.0.0"
 framework: "net10.0"
 overview: "Adds fine-grained video zoom controls to Jellyfin Web playback."
@@ -12,4 +12,4 @@ owner: "alexcroox"
 artifacts:
   - "Jellyfin.Plugin.FineZoom.dll"
   - "BINARY-LICENSE"
-changelog: "Initial Jellyfin 12 release with per-video fine zoom controls."
+changelog: "Keeps the Fine Zoom control attached when Jellyfin rebuilds the playback toolbar."
