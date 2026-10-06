@@ -39,6 +39,12 @@ restart Jellyfin and hard-refresh Jellyfin Web.
 
 ## Technical note
 
+An upstream Jellyfin Web pull request,
+[#7627: Custom aspect ratio to zoom / scale videos](https://github.com/jellyfin/jellyfin-web/pull/7627),
+implemented this functionality directly in the client without runtime script
+injection. It received no formal maintainer review and was closed unmerged
+after seven months because its merge conflicts remained unresolved.
+
 Jellyfin does not currently provide a supported server-plugin extension point
 for playback controls. Fine Zoom injects its embedded client component into the
 Jellyfin Web shell at request time and does not modify Jellyfin Web files on
