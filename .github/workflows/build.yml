@@ -1,0 +1,16 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet restore Jellyfin.Plugin.FineZoom.slnx
+      - run: dotnet build Jellyfin.Plugin.FineZoom.slnx --configuration Release --no-restore
