@@ -3,7 +3,7 @@
 Fine Zoom adds a 100-200% video zoom slider with 1% steps to Jellyfin Web. It is
 designed for ultrawide displays and videos that contain hard-coded black bars.
 
-![Fine Zoom set to 135% during Jellyfin Web playback](docs/fine-zoom-preview.jpg)
+![Fine Zoom set to 134% during Jellyfin Web playback](docs/fine-zoom-preview.png)
 
 The control appears beside Jellyfin's playback settings button. Zoom preserves
 the picture's proportions, includes one-percent decrease/increase buttons and a
